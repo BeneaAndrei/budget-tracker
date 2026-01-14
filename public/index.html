@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Budget Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+
+    <header class="header">
+      <h1>💸 Budget Tracker</h1>
+      <div id="userBar" class="userbar hidden">
+        <span id="userEmail"></span>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </header>
+
+    <!-- LOGIN -->
+    <section id="authScreen" class="card">
+      <h2>Sign in</h2>
+      <p>Use Google to access your personal budget.</p>
+      <button id="googleBtn" class="primary">Continue with Google</button>
+    </section>
+
+    <!-- APP -->
+    <main id="app" class="hidden">
+      <div class="tabs">
+        <button class="tab active" data-tab="reality">Reality</button>
+        <button class="tab" data-tab="calculator">Calculator</button>
+      </div>
+
+      <!-- REALITY TAB -->
+      <section id="reality" class="tabpage active">
+
+        <div class="grid">
+          <div class="kpi card">
+            <div class="kpiTitle">Net In</div>
+            <div id="kpiNetIn" class="kpiVal">0 €</div>
+          </div>
+          <div class="kpi card">
+            <div class="kpiTitle">Payments Out</div>
+            <div id="kpiOut" class="kpiVal">0 €</div>
+          </div>
+          <div class="kpi card">
+            <div class="kpiTitle">Balance</div>
+            <div id="kpiBal" class="kpiVal">0 €</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Monthly reality</h3>
+          <canvas id="realityChart"></canvas>
+          <div id="realityTable" class="table"></div>
+          <div id="monthDrill" class="drill"></div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>Add income (gross)</h3>
+            <form id="incomeForm">
+              <input id="incomeAmount" type="number" step="0.01" placeholder="Gross amount (€)" required />
+              <input id="incomeDate" type="date" required />
+              <input id="incomeSource" type="text" placeholder="Source" required />
+              <button class="primary">Add income</button>
+            </form>
+            <div id="incomeList" class="list"></div>
+          </div>
+
+          <div class="card">
+            <h3>Add payment</h3>
+            <form id="paymentForm">
+              <input id="payTitle" type="text" placeholder="Title" required />
+              <select id="payType">
+                <option value="ONE_OFF">One-off</option>
+                <option value="FIXED_MONTHLY" selected>Fixed monthly</option>
+                <option value="SPREAD">Spread total</option>
+              </select>
+              <input id="payAmount" type="number" step="0.01" placeholder="Amount" required />
+              <input id="payStart" type="month" required />
+              <input id="payEnd" type="month" />
+              <button class="primary">Add payment</button>
+            </form>
+            <div id="paymentList" class="list"></div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- CALCULATOR TAB -->
+      <section id="calculator" class="tabpage">
+        <div class="card">
+          <h3>Forecast settings</h3>
+          <input id="forecastGross" type="number" step="0.01" placeholder="Expected gross per month (€)" />
+          <button id="saveForecastBtn" class="primary">Save</button>
+        </div>
+
+        <div class="card">
+          <h3>12-month forecast</h3>
+          <canvas id="forecastChart"></canvas>
+          <div id="forecastTable" class="table"></div>
+          <div id="forecastDrill" class="drill"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
